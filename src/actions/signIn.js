@@ -18,16 +18,10 @@ const signIn = (e, state, history ) => {
         })
         .then(resp => resp.json())
         .then(data => {
-            console.log(data)
-        //  if (data.error) {
-            
-        //  } else {
                 dispatch({ type: "SET_CURRENT_USER", user: data.user })
                 localStorage.setItem('jwt', data.jwt)
                 history.push('/home')
-        // }
         })
-
         
     }
 }

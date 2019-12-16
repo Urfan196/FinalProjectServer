@@ -17,7 +17,7 @@ export class SignUpUser extends Component {
         this.setState({
             [name]: value
         })
-    }
+    } 
 
     render() {
        const { firstName, lastName, birthday, email, password } = this.state
@@ -33,7 +33,7 @@ export class SignUpUser extends Component {
                     <br/><input type='date' name="birthday" value={birthday} onChange={this.handleChange}/>
                     <br/><label htmlFor="email">Email</label>
                     <br/><input type='email' name="email" value={email} onChange={this.handleChange}/>
-                    <br/><label htmlFor="email">Password</label>
+                    <br/><label htmlFor="password">Password</label>
                     <br/><input type='password' name="password" value={password} onChange={this.handleChange}/>
 
                     <br/><input type="submit" value="Next"></input>

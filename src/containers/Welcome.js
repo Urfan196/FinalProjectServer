@@ -9,8 +9,8 @@ class Welcome extends Component {
     render() {
         return (
             <div>
-                {<SignIn />}
-                <Link to='/signupuser'><button>Sign Up</button></Link>
+                {<SignIn history={this.props.history}/>}
+                <Link to='/signup-user'><button>Sign Up</button></Link>
             </div>
         );
     }
