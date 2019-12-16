@@ -1,46 +1,69 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux'
 
 export class SignUpAddress extends Component {
 
     state = {
-        firstName: '',
-        lastName: '',
-        birthday: '',
-        email: '',
-        password: ''
+        street: '',
+        city: '',
+        zip: '',
+        state: ''
     }
 
     handleChange = (e) => {
         const {name, value} = e.target
         this.setState({
             [name]: value
+        }) 
+    }
+
+    handleSubmit = (e, stateInfo, history, currentUser) => {
+        e.preventDefault();
+        const {street, city, zip, state} = stateInfo
+        fetch('http://localhost:3000/locations',{
+            method: "POST",
+            headers: {
+                "Content-type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                    address: street + city + zip + state,
+                    user_id: currentUser.id
+            })
         })
+        .then(history.push('/home'))
     }
 
     render() {
-       const { firstName, lastName, birthday, email, password } = this.state
+       const { street, city, zip, state } = this.state
+       const {currentUser, history} = this.props
+
         return (
             <div>
-
-                <form onSubmit={(e) => this.props.signUpUser(e, this.state, this.props.history)}>
-                    <label htmlFor="firstName">First Name</label>
-                    <br/><input name="firstName" value={firstName} onChange={this.handleChange}/>
-                    <br/><label htmlFor="lastName">Last Name</label>
-                    <br/><input name="lastName" value={lastName} onChange={this.handleChange}/>
-                    <br/><label htmlFor="birthday">Birthday</label>
-                    <br/><input type='date' name="birthday" value={birthday} onChange={this.handleChange}/>
-                    <br/><label htmlFor="email">Email</label>
-                    <br/><input type='email' name="email" value={email} onChange={this.handleChange}/>
-                    <br/><label htmlFor="email">Password</label>
-                    <br/><input type='password' name="password" value={password} onChange={this.handleChange}/>
-
-                    <br/><input type="submit" value="Next"></input>
+                <h1>Add your address</h1>
+                <form onSubmit={(e) => this.handleSubmit(e, this.state, history, currentUser)}>
+                    <label htmlFor="street">Street</label>
+                    <br/><input name="street" value={street} onChange={this.handleChange}/>
+                    <br/><label htmlFor="city">City</label>
+                    <br/><input name="city" value={city} onChange={this.handleChange}/>
+                    <br/><label htmlFor="zip">Zip</label>
+                    <br/><input name="zip" value={zip} onChange={this.handleChange}/>
+                    <br/><label htmlFor="state">State</label>
+                    <br/><input type='state' name="state" value={state} onChange={this.handleChange}/>
+                    <br/><input type="submit" value="Sign Up"></input>
                 </form>
                 
             </div>
         );
     }
-    
+
 }
 
-export default SignUpAddress;
+const mapStateToProps = state => {
+    return {
+      currentUser: state.currentUser
+    }
+  }
+
+
+export default connect(mapStateToProps)(SignUpAddress);
