@@ -4,7 +4,7 @@ const fetchAllItems = () => {
         return fetch('http://localhost:3000/items', {
             method: "GET",
             headers: {
-              "Authorization": `Bearer ${localStorage.getItem('jwt')}`,
+              "Authorization": `${localStorage.getItem('jwt')}`,
               "Accept": "application/json"
             }
         })

@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import Navbar from '../containers/Navbar'
 import ListingCard from './ListingCard'
 
@@ -14,10 +15,10 @@ const Profile = (props) => {
             <p>{birth_day}</p>
             <p>{email}</p>
             <p>{address}</p>
-            <button>Edit Profile</button>
+            <Link to='/edit-profile'><button>Edit Profile</button></Link>
 
             <h1>Your Listings:</h1>
-            {items.map(item => <ListingCard item={item} />)}
+            {items.map(item => <ListingCard key={item.id} item={item} />)}
 
         </div>
     )

@@ -1,38 +1,38 @@
 import React, {Component} from 'react'
+import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
+import deleteItem from '../actions/deleteItem'
+import editItemAvailablity from '../actions/editItemAvailablity'
 
 
 class ListingCard extends Component {
 
     
-
-    handleClick = () => {
-        const {id, available} = this.props.item
-        fetch(`http://localhost:3000/items/${id}`, {
-            method: "PATCH",
-            headers: {
-                "Authorization": `Bearer ${localStorage.getItem('jwt')}`,
-                "Content-type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify({
-                available: !available
-            })
-        })
-    }
-
     render () {
         const {title, available} = this.props.item
+        const {item, history, selectedItem, deleteItem, editItemAvailablity} = this.props
+
         return(
-            <div>
+            <div> 
                 <p>{title}</p>
-                <button>Edit Profile</button>
-                {available ? <button onClick = {this.handleClick}>Available</button> : <button onClick = {this.handleClick}> Not Available </button>}
+                <Link to='/edit-item' onClick={() => selectedItem(item)}><button>Edit Item</button></Link>
+                {available ? <button onClick = {(e)=> editItemAvailablity(e, item)}>Available</button> : <button onClick = {(e)=> editItemAvailablity(e, item)}> Not Available </button>}
                 
-                <button>Delete</button>
+                <button onClick={(e)=> deleteItem(e, item, history)} >Delete</button>
             </div>
         )
     }
     
 }
 
-export default ListingCard
+
+const mapsToDispatchProps = dispatch =>{
+    return{
+        selectedItem: (item) => dispatch({type: 'SET_SELECTED_ITEM', item: item}),
+        deleteItem: (e, item, history) => dispatch(deleteItem(e, item, history)),
+        editItemAvailablity: (e, item) => dispatch(editItemAvailablity(e, item))
+    }
+}
+
+export default connect(null, mapsToDispatchProps)(ListingCard)
+
