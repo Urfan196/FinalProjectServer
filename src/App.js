@@ -51,7 +51,7 @@ class App extends React.Component {
                 <Route exact path='/item-info' component={ItemInfo}/>
                 <Route exact path='/edit-item' component={EditItem}/>
               </Switch>
-            </> :
+            </> : 
             <p>Loading...</p>
             }
           
