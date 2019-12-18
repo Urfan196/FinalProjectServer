@@ -1,6 +1,5 @@
 const editItem = (e, state, id, history) => {
     e.preventDefault();
-
     return (dispatch) => {
         return fetch(`http://localhost:3000/items/${id}`, {
             method: "PATCH",
@@ -15,12 +14,12 @@ const editItem = (e, state, id, history) => {
             })
         })
         .then(resp => resp.json())
-        .then(data => {
-            dispatch({type: 'EDIT_SELECTED_ITEM', item: data.item})
-            dispatch({type: 'EDIT_ITEM_OF_CURRENT_USER', item: data.item})
+        .then(item => {
+            dispatch({type: 'SET_SELECTED_ITEM', item: item})
+            dispatch({type: 'EDIT_ITEM_OF_CURRENT_USER', item: item})
             history.push('/profile')
         })
-    }
+    }   
 }
 
 export default editItem;

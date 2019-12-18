@@ -1,6 +1,6 @@
 const deleteItem = (e, item, history) => {
     e.preventDefault();
-    
+
     return (dispatch) => {
         fetch(`http://localhost:3000/items/${item.id}`, {
             method: "DELETE",
@@ -12,7 +12,7 @@ const deleteItem = (e, item, history) => {
         })
         .then(() => {
             dispatch({type: 'DELETE_ITEM', item})
-            history.pushState('/profile')
+            history.push('/profile')
         })
     }
 }

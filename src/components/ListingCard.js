@@ -4,17 +4,18 @@ import {connect} from 'react-redux'
 import deleteItem from '../actions/deleteItem'
 import editItemAvailablity from '../actions/editItemAvailablity'
 
-
+ 
 class ListingCard extends Component {
 
     
     render () {
-        const {title, available} = this.props.item
+        const {title, description, available} = this.props.item
         const {item, history, selectedItem, deleteItem, editItemAvailablity} = this.props
 
         return(
             <div> 
                 <p>{title}</p>
+                <p>{description}</p>
                 <Link to='/edit-item' onClick={() => selectedItem(item)}><button>Edit Item</button></Link>
                 {available ? <button onClick = {(e)=> editItemAvailablity(e, item)}>Available</button> : <button onClick = {(e)=> editItemAvailablity(e, item)}> Not Available </button>}
                 

@@ -31,7 +31,7 @@ export class SignUpAddress extends Component {
                     user_id: currentUser.id
             })
         })
-        .then(history.push('/home'))
+        .then(() => history.push('/home')) //dispatch elave et
     }
 
     render() {
