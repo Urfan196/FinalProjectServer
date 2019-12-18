@@ -4,7 +4,8 @@ class ItemsController < ApplicationController
 
     def index
         items = Item.all
-        render json: items
+        render :index
+        # render json: items
     end
 
     def show
