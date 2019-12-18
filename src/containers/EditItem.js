@@ -16,7 +16,7 @@ class EditItem extends Component {
         this.setState({
             [name]: value
         })
-    }
+    } 
 
     render() {
         const {title, description} = this.state
@@ -36,7 +36,7 @@ class EditItem extends Component {
                 <button onClick={(e) => deleteItem(e, selectedItem, history)}>Delete Item</button>
             </div>
         );
-    }
+    } 
 }
 
 const mapStateToProps = state => {
@@ -48,7 +48,7 @@ const mapStateToProps = state => {
 const mapsToDispatchProps = dispatch => {
     return {
         editItem: (e, state, id, history) => dispatch(editItem(e, state, id, history)),
-        deleteItem: (e, item, history) => dispatch(editItem(e, item, history))
+        deleteItem: (e, item, history) => dispatch(deleteItem(e, item, history))
     }
 }
 

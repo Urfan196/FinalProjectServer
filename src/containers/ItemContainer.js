@@ -8,11 +8,16 @@ import ItemCard from '../components/ItemCard'
 
 const ItemContainer = (props) => {
 
+    const noCurrentUserArray = props.items.filter(item => item.user_id !== props.currentUser.id)
+    const availArray = noCurrentUserArray.filter(item => item.available == true)
+    
     return (
         <div>
             {<Navbar/>}
             {<Filter/>}
-            {props.items.map(item => <ItemCard key={item.id} item={item}/> )}
+            {
+            availArray.map(item => <ItemCard key={item.id} item={item}/> )
+            }
         </div>
     )
     
@@ -20,7 +25,8 @@ const ItemContainer = (props) => {
 
 const mapStateToProps = state => {
     return {
-        items: state.items
+        items: state.items, 
+        currentUser: state.currentUser
     }
 }
 

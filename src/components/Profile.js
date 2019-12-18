@@ -6,19 +6,19 @@ import ListingCard from './ListingCard'
 
 const Profile = (props) => {
 
-    const {first_name, last_name, birth_day, email, address, items} = props.currentUser
+    const {first_name, last_name, birthday, email, address, items} = props.currentUser
 
     return (
         <div>
             {<Navbar/>}
             <h1>{first_name + ' ' + last_name}</h1>
-            <p>{birth_day}</p>
+            <p>{birthday}</p>
             <p>{email}</p>
             <p>{address}</p>
             <Link to='/edit-profile'><button>Edit Profile</button></Link>
 
             <h1>Your Listings:</h1>
-            {items.map(item => <ListingCard key={item.id} item={item} />)}
+            {items.map(item => <ListingCard key={item.id} item={item} history={props.history} />)}
 
         </div>
     )

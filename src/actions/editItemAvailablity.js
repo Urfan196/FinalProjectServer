@@ -14,8 +14,8 @@ const editItemAvailablity = (e, item) => {
             })
         })
         .then(resp => resp.json())
-        .then(data => {
-            dispatch({type: 'CHANGE_ITEM_AVAILABILITY', item: data.item})
+        .then(item => {
+            dispatch({type: 'CHANGE_ITEM_AVAILABILITY', item: item})
         })
     }
 }

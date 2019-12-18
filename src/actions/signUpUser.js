@@ -1,20 +1,23 @@
 const signUpUser = (e, state, history) => {
     e.preventDefault();
 
+    const {firstName, lastName, birthday, email, password} = state
+
     return (dispatch) => {
         fetch('http://localhost:3000/users',{
             method: "POST",
             headers: {
+                "Authorization": `${localStorage.getItem('jwt')}`,
                 "Content-type": "application/json",
                 "Accept": "application/json"
             },
             body: JSON.stringify({
                 user: {
-                    first_name: state.firstName,
-                    last_name: state.lastName,
-                    birth_day: state.birthday,
-                    email: state.email,
-                    password: state.password 
+                    first_name: firstName,
+                    last_name: lastName,
+                    birthday,
+                    email,
+                    password 
                 }
             })
         })

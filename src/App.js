@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import Welcome from './containers/Welcome'
 import SignUpUser from './containers/SignUpUser'
 import SignUpAddress from './containers/SignUpAddress'
-import UpdateUserInfo from './containers/UpdateUserInfo'
 import ItemContainer from './containers/ItemContainer'
 import ShareItem from './containers/ShareItem'
 import ItemInfo from './components/ItemInfo'
@@ -40,7 +39,7 @@ class App extends React.Component {
             <Route exact path='/signup-user' render={props => <SignUpUser {...props}/>} />
             <Route exact path='/signup-address' component={SignUpAddress}/>
          
-            { Object.keys(this.props.currentUser).length != 0 ?
+            { this.props.currentUser ?
             <>
               <Switch>
                 <Route exact path='/home' component={ItemContainer}/>
