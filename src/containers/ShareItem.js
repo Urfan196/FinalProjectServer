@@ -6,9 +6,10 @@ import shareItem from '../actions/shareItem'
 class ShareItem extends Component {
 
     state = {
+        image: '',
         title: '',
         description: '',
-        category: ''
+        category: 'food'
     }
 
     handleChange = (e) => {
@@ -16,6 +17,12 @@ class ShareItem extends Component {
         this.setState({
             [name]: value
         }) 
+    }
+
+    handleUpload = (e) => {
+        this.setState({
+            image: e.target.files[0]
+        })
     }
 
     render() {
@@ -27,8 +34,10 @@ class ShareItem extends Component {
                 {<Navbar/>}
                 <h4>Share Item</h4>
 
-                <form onSubmit={(e) => shareItem(e, history, currentUser, this.state) }>
-                    <label htmlFor="title">Title:</label>
+               <form onSubmit={(e) => shareItem(e, history, currentUser, this.state) }>
+                    <input type="file" accept="image/*" onChange={this.handleUpload}/><br/>
+                    
+                    <br/><label htmlFor="title">Title:</label>
                     <br/><input name="title" value={title} onChange={this.handleChange}/>
                     <br/><label htmlFor="description">Description:</label>
                     <br/><input name="description" value={description} onChange={this.handleChange}/>
@@ -41,7 +50,7 @@ class ShareItem extends Component {
 
                     <br/><input type="submit" value="Share Item"/>
                 </form>
-                
+
             </div>
         );
     }

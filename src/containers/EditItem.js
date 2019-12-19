@@ -8,7 +8,9 @@ class EditItem extends Component {
 
     state = {
         title: this.props.selectedItem.title,
-        description: this.props.selectedItem.description
+        description: this.props.selectedItem.description,
+        category: this.props.selectedItem.category,
+        image: this.props.selectedItem.imageUrl
     }
 
     handleChange = (e) => {
@@ -18,27 +20,42 @@ class EditItem extends Component {
         })
     } 
 
+    handleUpload = (e) => {
+        this.setState({
+            image: e.target.files[0]
+        })
+    }
+
     render() {
-        const {title, description} = this.state
+        const {title, description, image, category} = this.state
         const {selectedItem, history, deleteItem, editItem} = this.props
         const {id} = selectedItem
         return (
             <div>
                 {<Navbar/>}
                 <form onSubmit={(e) => editItem(e, this.state, id, history)}>
-                    <label htmlFor="title">Title:</label>
+                    <br/><img src={image} alt="Item image" height="42" width="42" />
+                    <input type="file" accept="image/*" onChange={this.handleUpload}/>
+                   
+                    <br/><label htmlFor="title">Title:</label>
                     <br/><input name="title" value={title} onChange={this.handleChange}/>
                     <br/><label htmlFor="description">Description</label>
                     <br/><input name="description" value={description} onChange={this.handleChange}/>
+                    
+                    <br/><label>Category:</label>
+                    <br/><select name="category" value={category} onChange={this.handleChange}>
+                        <option value="food">food</option>
+                        <option value="non-food">non-food</option>
+                    </select>
 
                     <br/><input type="submit" value="Update"></input>
                 </form>
                 <button onClick={(e) => deleteItem(e, selectedItem, history)}>Delete Item</button>
             </div>
         );
-    } 
+    }  
 }
-
+ 
 const mapStateToProps = state => {
     return {
         selectedItem: state.selectedItem

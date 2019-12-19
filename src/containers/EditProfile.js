@@ -13,17 +13,17 @@ class EditProfile extends Component {
         birthday: this.props.currentUser.birth_day
     }
 
-    componentDidUpdate() {
-        const {first_name, last_name, email, birth_day} = this.props.currentUser
-        if(Object.keys(this.props.currentUser).length > 0 && this.state.firstName == undefined){
-          this.setState({
-            firstName: first_name,
-            lastName: last_name,
-            email: email,
-            birthday: birth_day
-          })
-        }
-    }
+    // componentDidUpdate() {
+    //     const {first_name, last_name, email, birth_day} = this.props.currentUser
+    //     if(Object.keys(this.props.currentUser).length > 0 && this.state.firstName == undefined){
+    //       this.setState({
+    //         firstName: first_name,
+    //         lastName: last_name,
+    //         email: email,
+    //         birthday: birth_day
+    //       })
+    //     }
+    // }
 
     handleChange = (e) => {
         const {name, value} = e.target
