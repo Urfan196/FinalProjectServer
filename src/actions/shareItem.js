@@ -1,23 +1,22 @@
 const shareItem = (e, history, user, state) => {
     e.preventDefault()
 
-    const {title, description, category} = state
+    const {title, description, category, image} = state
 
-    return(dispatch) => {
-        fetch('http://localhost:3000/items', {
-            method: "POST",
-            headers: {
-                "Authorization": `${localStorage.getItem('jwt')}`,
-                "Content-type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify({
-                title,
-                description,
-                category,
-                available: true,
-                user_id: user.id
-            })
+    const formData = new FormData()
+    formData.append('item[title]', title)
+    formData.append('item[description]', description)
+    formData.append('item[category]', category)
+    formData.append('item[image]', image)
+    formData.append('item[available]', true)
+    formData.append('item[user_id]', user.id)
+     
+    return (dispatch) => {
+        return fetch('http://localhost:3000/items', {
+        method: 'POST',
+        headers: {
+            "Authorization": `${localStorage.getItem('jwt')}`},
+        body: formData
         })
         .then (resp => resp.json())
         .then (item => {
@@ -27,5 +26,5 @@ const shareItem = (e, history, user, state) => {
     }
 }
 
-export default shareItem
 
+export default shareItem

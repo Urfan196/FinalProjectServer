@@ -22,7 +22,7 @@ const Profile = (props) => {
 
         </div>
     )
- 
+  
 }
 
 const mapStateToProps = state => {

@@ -9,19 +9,20 @@ class ListingCard extends Component {
 
     
     render () {
-        const {title, description, available} = this.props.item
+        const {title, description, available, imageUrl} = this.props.item
         const {item, history, selectedItem, deleteItem, editItemAvailablity} = this.props
 
         return(
             <div> 
-                <p>{title}</p>
-                <p>{description}</p>
+                <img src={imageUrl} alt="Item image" height="42" width="42" />
+                <p>Title: {title}</p>
+                <p>Description: {description}</p>
                 <Link to='/edit-item' onClick={() => selectedItem(item)}><button>Edit Item</button></Link>
                 {available ? <button onClick = {(e)=> editItemAvailablity(e, item)}>Available</button> : <button onClick = {(e)=> editItemAvailablity(e, item)}> Not Available </button>}
-                
+
                 <button onClick={(e)=> deleteItem(e, item, history)} >Delete</button>
             </div>
-        )
+        ) 
     }
     
 }
