@@ -3,20 +3,17 @@ class ItemsController < ApplicationController
     skip_before_action :authorized, only: [:index]
 
     def index
-        items = Item.all
+        @items = Item.all
         render :index
-        # render json: items
     end
 
     def show
-        item = Item.find(params[:id])
+        item = Item.find(params[:id]) 
         render json: item
     end
 
     def create
-        user_id = current_user.id
         item = Item.new(item_params)
-        item.user_id = user_id
         if item.save
             render json: item
         else
@@ -45,7 +42,7 @@ class ItemsController < ApplicationController
     private
 
     def item_params
-        params.require(:item).permit(:title, :description, :available, :category)
+        params.require(:item).permit(:title, :description, :available, :category, :image, :user_id)
     end
 
 end
