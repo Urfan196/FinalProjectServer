@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
 
-    skip_before_action :authorized, only: [:index]
+    skip_before_action :authorized, only: [:index, :show]
 
     def index
         @items = Item.all
@@ -8,8 +8,8 @@ class ItemsController < ApplicationController
     end
 
     def show
-        item = Item.find(params[:id]) 
-        render json: item
+        @item = Item.find(params[:id]) 
+        render :show
     end
 
     def create
