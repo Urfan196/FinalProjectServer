@@ -14,11 +14,13 @@ const editItemAvailablity = (e, item) => {
             })
         })
         .then(resp => resp.json())
-        .then(item => {
-            dispatch({type: 'CHANGE_ITEM_AVAILABILITY', item: item})
+        .then(data => {
+            const {item, imageUrl} = data
+            const itemObj = {...item, imageUrl}
+            dispatch({type: 'CHANGE_ITEM_AVAILABILITY', item: itemObj})
         })
     }
-}
+} 
 
 export default editItemAvailablity;
 

@@ -6,7 +6,8 @@ import ListingCard from './ListingCard'
 
 const Profile = (props) => {
 
-    const {first_name, last_name, birthday, email, address, items} = props.currentUser
+    const {id, first_name, last_name, birthday, email, address} = props.currentUser
+    const filteredArray = props.items.filter(item => item.user_id == id)
 
     return (
         <div>
@@ -18,16 +19,17 @@ const Profile = (props) => {
             <Link to='/edit-profile'><button>Edit Profile</button></Link>
 
             <h1>Your Listings:</h1>
-            {items.map(item => <ListingCard key={item.id} item={item} history={props.history} />)}
+            {filteredArray.map(item => <ListingCard key={item.id} item={item} history={props.history} />)}
 
-        </div>
+        </div> 
     )
   
 }
 
 const mapStateToProps = state => {
     return {
-        currentUser: state.currentUser
+        currentUser: state.currentUser,
+        items: state.items
     }
 }
 

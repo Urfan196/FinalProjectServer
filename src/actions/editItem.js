@@ -16,32 +16,14 @@ const editItem = (e, state, id, history) => {
         body: formData
         })
         .then(resp => resp.json())
-        .then(item => {
-            dispatch({type: 'SET_SELECTED_ITEM', item: item})
-            dispatch({type: 'EDIT_ITEM_OF_CURRENT_USER', item: item})
+        .then(data => {
+            const {item, imageUrl} = data
+            const itemObj = {...item, imageUrl}
+            dispatch({type: 'SET_SELECTED_ITEM', item: itemObj})
+            dispatch({type: 'EDIT_ITEM', item: itemObj})
             history.push('/profile')
         })
     }   
 }
 
 export default editItem;
-
-
-
-
-
-
-
-// return (dispatch) => {
-//     return fetch(`http://localhost:3000/items/${id}`, {
-//         method: "PATCH",
-//         headers: {
-//             "Authorization": `${localStorage.getItem('jwt')}`,
-//             "Content-type": "application/json",
-//             "Accept": "application/json"
-//         },
-//         body: JSON.stringify({
-//             title: state.title,
-//             description: state.description
-//         })
-//     })

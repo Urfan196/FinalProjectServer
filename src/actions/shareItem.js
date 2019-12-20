@@ -19,8 +19,10 @@ const shareItem = (e, history, user, state) => {
         body: formData
         })
         .then (resp => resp.json())
-        .then (item => {
-            dispatch({type: 'ADD_NEW_ITEM', item })
+        .then (data => {
+            const {item, imageUrl} = data
+            const itemObj = {...item, imageUrl}
+            dispatch({type: 'CREATE_ITEM', item: itemObj})
             history.push('/profile')
         })
     }

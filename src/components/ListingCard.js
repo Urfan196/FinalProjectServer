@@ -14,7 +14,7 @@ class ListingCard extends Component {
 
         return(
             <div> 
-                <img src={imageUrl} alt="Item image" height="42" width="42" />
+                <img src={imageUrl} alt="Item image" height="150" width="150" />
                 <p>Title: {title}</p>
                 <p>Description: {description}</p>
                 <Link to='/edit-item' onClick={() => selectedItem(item)}><button>Edit Item</button></Link>
@@ -26,7 +26,7 @@ class ListingCard extends Component {
     }
     
 }
-
+ 
 
 const mapsToDispatchProps = dispatch =>{
     return{

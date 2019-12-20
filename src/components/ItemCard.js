@@ -5,12 +5,12 @@ import {connect} from 'react-redux'
 const ItemCard = (props) => {
     
     const {title, imageUrl} = props.item
-
+    
     return (
         <Link to='/item-info' onClick={() => props.selectedItem(props.item)} > 
             <div>
                 <h5>{title}</h5> 
-                <img src={imageUrl} alt="Item image" height="42" width="42" />
+                <img src={imageUrl} alt="Item image" height="200" width="200" />
             </div>
         </Link>
     )

@@ -20,7 +20,7 @@ const ItemContainer = (props) => {
             }
         </div>
     )
-    
+     
 }
 
 const mapStateToProps = state => {
