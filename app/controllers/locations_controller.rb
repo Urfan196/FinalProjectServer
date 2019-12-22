@@ -3,19 +3,19 @@ class LocationsController < ApplicationController
     skip_before_action :authorized, only: [:index]
 
     def index
-        locations = Location.all
+        locations = Location.near_locations(params[:distance], params[:coord])
         render json: locations
     end
-
+ 
     def show
         location = Location.find(params[:id])
         render json: location
     end
 
     def create
-        # user_id = current_user.id
         location = Location.new(location_params)
-        # location.user_id = user_id
+        location.latitude = Location.get_coordinates(params[:address])[0]
+        location.longitude = Location.get_coordinates(params[:address])[1]
         if location.save
             render json: location
         else
@@ -25,6 +25,8 @@ class LocationsController < ApplicationController
 
     def update
         location = Location.find(params[:id])
+        location.latitude = Location.get_coordinates(params[:address])[0]
+        location.longitude = Location.get_coordinates(params[:address])[1]
         if location.update(location_params)
             render json: location
         else
@@ -35,7 +37,7 @@ class LocationsController < ApplicationController
     private
 
     def location_params
-        params.require(:location).permit(:address, :latitude, :longitude, :user_id)
+        params.require(:location).permit(:address, :user_id, :distance, :coord)
     end
 
 end
