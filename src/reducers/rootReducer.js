@@ -2,6 +2,7 @@ const initialState = {
     currentUser: {},
     users: [],
     items: [],
+    locations:[],
     selectedItem: {}
 }
 
@@ -48,6 +49,10 @@ const rootReducer = (state = initialState, action) => {
         case 'DELETE_ITEM':
             const filteredArray = state.items.filter(item => item.id !== action.item.id)
             return {...state, items: filteredArray}
+
+        case 'SET_LOCATION':
+            return {...state, currentUser: {...state.currentUser, location: action.location}}
+
         default:
             return state
     }

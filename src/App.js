@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Welcome from './containers/Welcome'
 import SignUpUser from './containers/SignUpUser'
-import SignUpAddress from './containers/SignUpAddress'
+import AddAddress from './containers/AddAddress'
 import ItemContainer from './containers/ItemContainer'
 import ShareItem from './containers/ShareItem'
 import ItemInfo from './components/ItemInfo'
@@ -37,11 +37,12 @@ class App extends React.Component {
             
             <Route exact path='/signup' component={SignUpUser}/>
             <Route exact path='/signup-user' render={props => <SignUpUser {...props}/>} />
-            <Route exact path='/signup-address' component={SignUpAddress}/>
+            
          
             { this.props.currentUser ?
             <>
               <Switch>
+                <Route exact path='/add-address' component={AddAddress}/>
                 <Route exact path='/home' component={ItemContainer}/>
                 <Route exact path='/profile' component={Profile}/>
                 <Route exact path='/edit-profile' component={EditProfile}/>
@@ -49,11 +50,12 @@ class App extends React.Component {
                 <Route exact path='/share-item' component={ShareItem}/>
                 <Route exact path='/item-info' component={ItemInfo}/>
                 <Route exact path='/edit-item' component={EditItem}/>
+                
               </Switch>
             </> : 
             <p>Loading...</p>
             }
-          
+
           </Switch>
         </Router>
       </div>
