@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
 
-    skip_before_action :authorized, only: [:index, :show]
+    skip_before_action :authorized, only: [:index]
 
     def index
         @items = Item.all
@@ -15,7 +15,7 @@ class ItemsController < ApplicationController
     def create
         item = Item.new(item_params)
         if item.save
-            render json: item
+            render json: {item: item, imageUrl: rails_blob_url(item.image)} 
         else
             render json: {error: "Something went wrong"}
         end
@@ -24,7 +24,7 @@ class ItemsController < ApplicationController
     def update
         item = Item.find(params[:id])
         if item.update(item_params)
-            render json: item
+            render json: {item: item, imageUrl: rails_blob_url(item.image)} 
         else
             render json: {error: "Something went wrong"}
         end
