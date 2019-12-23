@@ -6,28 +6,32 @@ import ListingCard from './ListingCard'
 
 const Profile = (props) => {
 
-    const {first_name, last_name, birthday, email, address, items} = props.currentUser
+    const {id, first_name, last_name, birthday, email, location} = props.currentUser
+    const filteredArray = props.items.filter(item => item.user_id === id)
 
     return (
         <div>
             {<Navbar/>}
+
             <h1>{first_name + ' ' + last_name}</h1>
-            <p>{birthday}</p>
-            <p>{email}</p>
-            <p>{address}</p>
+            <p>Birthday: {birthday}</p>
+            <p>Email: {email}</p>
+            {location ? <p>Your current location: {location.address}</p> : <p>Loading...</p>}
             <Link to='/edit-profile'><button>Edit Profile</button></Link>
+            <Link to='/add-address' ><button>Change Your Address</button></Link>
 
             <h1>Your Listings:</h1>
-            {items.map(item => <ListingCard key={item.id} item={item} history={props.history} />)}
+            {filteredArray.map(item => <ListingCard key={item.id} item={item} history={props.history} />)}
 
-        </div>
+        </div> 
     )
-  
 }
 
 const mapStateToProps = state => {
     return {
-        currentUser: state.currentUser
+        currentUser: state.currentUser,
+        items: state.items,
+        locations: state.locations
     }
 }
 

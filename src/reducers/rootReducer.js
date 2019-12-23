@@ -2,6 +2,7 @@ const initialState = {
     currentUser: {},
     users: [],
     items: [],
+    locations:[],
     selectedItem: {}
 }
 
@@ -20,34 +21,40 @@ const rootReducer = (state = initialState, action) => {
         case 'DELETE_USER':
             const deletedArray = state.users.filter(user => user.id !== action.user.id)
             return {...state, users: deletedArray}
+            
         case 'SET_ALL_ITEMS':
             return {...state, items: action.items }
         case 'SET_SELECTED_ITEM':
             return {...state, selectedItem: action.item}
-        case 'ADD_NEW_ITEM':
-            const user = state.currentUser
-            return {...state, currentUser: {...user, items:[...user.items, action.item]}}
-        case 'EDIT_ITEM_OF_CURRENT_USER':
-            const newArray = state.currentUser.items.map(item =>{
+        case 'CREATE_ITEM':
+            return {...state, items: [...state.items, action.item]}
+        case 'EDIT_ITEM':
+            const newArray = state.items.map(item =>{
                 if(item.id === action.item.id){
                     return action.item
                 } else {
                     return item
-                }
+                } 
             })
-            return {...state, currentUser: {...state.currentUser, items: newArray}}
+            return {...state, items: newArray}
         case 'CHANGE_ITEM_AVAILABILITY':
-            const availArray = state.currentUser.items.map(item =>{
+            const availArray = state.items.map(item =>{
                 if(item.id === action.item.id){
                     return action.item
                 } else {
                     return item
                 }
             })
-            return {...state, currentUser: {...state.currentUser, items: availArray}}
+            return {...state, items: availArray}
         case 'DELETE_ITEM':
-            const filteredArray = state.currentUser.items.filter(item => item.id !== action.item.id)
-            return {...state, currentUser: {...state.currentUser, items: filteredArray}}
+            const filteredArray = state.items.filter(item => item.id !== action.item.id)
+            return {...state, items: filteredArray}
+
+        case 'SET_NEAR_LOCATION':
+            return {...state, locations: action.locations}
+        case 'SET_LOCATION':
+            return {...state, currentUser: {...state.currentUser, location: action.location}}
+
         default:
             return state
     }

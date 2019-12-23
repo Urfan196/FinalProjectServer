@@ -24,6 +24,6 @@ const editProfile = (e, history, state, id) => {
             history.push('/profile')
         })
     }
-}
+} 
 
 export default editProfile;

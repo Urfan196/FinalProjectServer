@@ -10,7 +10,7 @@ class EditItem extends Component {
         title: this.props.selectedItem.title,
         description: this.props.selectedItem.description,
         category: this.props.selectedItem.category,
-        image: this.props.selectedItem.imageUrl
+        image: ''
     }
 
     handleChange = (e) => {
@@ -27,14 +27,14 @@ class EditItem extends Component {
     }
 
     render() {
-        const {title, description, image, category} = this.state
+        const {title, description, category} = this.state
         const {selectedItem, history, deleteItem, editItem} = this.props
         const {id} = selectedItem
         return (
             <div>
                 {<Navbar/>}
                 <form onSubmit={(e) => editItem(e, this.state, id, history)}>
-                    <br/><img src={image} alt="Item image" height="42" width="42" />
+                    <br/><img src={selectedItem.imageUrl} alt="Item image" height="150" width="150" />
                     <input type="file" accept="image/*" onChange={this.handleUpload}/>
                    
                     <br/><label htmlFor="title">Title:</label>

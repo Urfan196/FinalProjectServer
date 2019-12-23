@@ -36,7 +36,7 @@ export class SignUpUser extends Component {
                     <br/><label htmlFor="password">Password</label>
                     <br/><input type='password' name="password" value={password} onChange={this.handleChange}/>
 
-                    <br/><input type="submit" value="Next"></input>
+                    <br/><input type="submit" value="Next"/>
                 </form>
                 
             </div>
