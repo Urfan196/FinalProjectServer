@@ -2,7 +2,7 @@ const setAddress = (e, stateInfo, history, user) => {
     e.preventDefault();
 
     const {street, city, zip, state} = stateInfo
-    const address = street + ', ' + city + ', ' + state + ' ' + zip
+    const address = street + ', ' + city + ', ' + state + ', ' + zip
     
     const route = user.location ? '/profile' : '/home'
     const url = user.location ? `http://localhost:3000/locations/${user.location.id}`  : 'http://localhost:3000/locations'

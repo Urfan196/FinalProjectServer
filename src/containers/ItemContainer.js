@@ -1,33 +1,49 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import Navbar from './Navbar'
 import Filter from './Filter'
 import ItemCard from '../components/ItemCard'
+import fetchNearLocations from '../actions/fetchNearLocations'
 
 
 
-const ItemContainer = (props) => {
+class ItemContainer extends Component {
 
-    const noCurrentUserArray = props.items.filter(item => item.user_id !== props.currentUser.id)
-    const availArray = noCurrentUserArray.filter(item => item.available == true)
+    componentDidMount () {
+        this.props.fetchNearLocations(this.props.currentUser)
+    }
     
-    return (
-        <div>
-            {<Navbar/>}
-            {<Filter/>}
-            {
-            availArray.map(item => <ItemCard key={item.id} item={item}/> )
-            }
-        </div>
-    )
+    render () {  
+
+        return (
+            <div>
+                {<Navbar/>}
+                {<Filter/>}
+                {
+                this.props.locations. map (obj => {
+                    const {location, distance, items} = obj
+                    const itemCard = items.map(item => item.available && <ItemCard key={item.id} item={item} distance={distance} location={location}/>)
+                    return itemCard
+                })
+                }
+            </div>
+        )
+    }
      
 }
 
 const mapStateToProps = state => {
     return {
         items: state.items, 
-        currentUser: state.currentUser
+        currentUser: state.currentUser,
+        locations: state.locations
     }
 }
 
-export default connect(mapStateToProps)(ItemContainer);
+const mapsToDispatchProps = dispatch => {
+    return{
+      fetchNearLocations: (user,distance) => dispatch(fetchNearLocations(user, distance))
+    }
+  }
+
+export default connect(mapStateToProps, mapsToDispatchProps)(ItemContainer);

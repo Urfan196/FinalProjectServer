@@ -50,6 +50,8 @@ const rootReducer = (state = initialState, action) => {
             const filteredArray = state.items.filter(item => item.id !== action.item.id)
             return {...state, items: filteredArray}
 
+        case 'SET_NEAR_LOCATION':
+            return {...state, locations: action.locations}
         case 'SET_LOCATION':
             return {...state, currentUser: {...state.currentUser, location: action.location}}
 
