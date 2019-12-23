@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   
 
   post '/login', to: 'auth#create'
+  post '/near-locations', to: 'near_locations#create'
   get '/profile', to: 'users#profile'
   get '/reauth', to: 'auth#re_auth'
 

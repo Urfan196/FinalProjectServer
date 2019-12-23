@@ -3,7 +3,7 @@ class LocationsController < ApplicationController
     skip_before_action :authorized, only: [:index]
 
     def index
-        locations = Location.near_locations(params[:distance], params[:coord])
+        locations = Location.all
         render json: locations
     end
  
