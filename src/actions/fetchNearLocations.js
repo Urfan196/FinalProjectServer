@@ -1,8 +1,11 @@
- const fetchNearLocations = (user, distance = 10 ) => {
+ const fetchNearLocations = (e, user, dist = '10') => {
+    e && e.preventDefault()
+
+    const distance = parseInt(dist)
 
     const {latitude, longitude} = user.location
     const coords = [latitude, longitude]
-    
+
     return (dispatch) => {
         return fetch('http://localhost:3000/near-locations', {
             method: "POST",
@@ -17,7 +20,7 @@
             })
         })
         .then(res => res.json())
-        .then(locations => {
+        .then(locations => {          
             dispatch({ type: 'SET_NEAR_LOCATION', locations })
         })
     }
