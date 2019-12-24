@@ -20,7 +20,7 @@ class ItemCard extends Component {
             headers: {
               "Authorization": `${localStorage.getItem('jwt')}`,
               "Accept": "application/json"
-            }
+            } 
         })
         .then(res => res.json())
         .then(item => {

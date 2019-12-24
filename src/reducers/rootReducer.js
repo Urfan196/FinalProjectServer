@@ -3,7 +3,8 @@ const initialState = {
     users: [],
     items: [],
     locations:[],
-    selectedItem: {}
+    selectedItem: {},
+    filterCategory: 'All'
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -54,6 +55,9 @@ const rootReducer = (state = initialState, action) => {
             return {...state, locations: action.locations}
         case 'SET_LOCATION':
             return {...state, currentUser: {...state.currentUser, location: action.location}}
+
+        case 'SET_FILTER_CATEGORY':
+            return {...state, filterCategory: action.category}
 
         default:
             return state
