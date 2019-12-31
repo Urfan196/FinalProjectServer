@@ -1,5 +1,7 @@
 class ConvosController < ApplicationController
 
+  skip_before_action :authorized, only: [:create, :index]
+
     def index
         convos = Convo.all
         render json: convos
@@ -11,16 +13,16 @@ class ConvosController < ApplicationController
     # end
 
     def create
-        convo = Convo.new(convo_params)
-        if convo.save
-          serialized_data = ActiveModelSerializers::Adapter::Json.new(
-            ConvoSerializer.new(convo)
-          ).serializable_hash
-          ActionCable.server.broadcast 'convos_channel', serialized_data
-          head :ok
-        end
+      convo = Convo.new(convo_params)
+      if convo.save
+        serialized_data = ActiveModelSerializers::Adapter::Json.new(
+          ConvoSerializer.new(convo)
+        ).serializable_hash
+        ActionCable.server.broadcast 'convos_channel', serialized_data
+        head :ok
       end
-
+    end
+ 
     # def create
     #     user_id = current_user.id
     #     convo = Convo.new(convo_params)
@@ -44,8 +46,9 @@ class ConvosController < ApplicationController
     private
 
     def convo_params
-        params.require(:convo).permit(:title, :sender_id, :receiver_id)
+        params.require(:convo).permit(:title, :sender_id,)
     end
 
 
 end
+ :receiver_id

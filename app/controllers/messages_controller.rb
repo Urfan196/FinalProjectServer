@@ -1,5 +1,7 @@
 class MessagesController < ApplicationController
 
+  skip_before_action :authorized, only: [:create]
+
     # def index
     #     messages = Message.all
     #     render json: messages
@@ -29,7 +31,7 @@ class MessagesController < ApplicationController
           MessagesChannel.broadcast_to convo, serialized_data
           head :ok
         end
-      end
+    end
 
 
     def message_params
