@@ -2,7 +2,6 @@ class MessagesChannel < ApplicationCable::Channel
   def subscribed
     convo = Convo.find(params[:convo])
     stream_for convo
-    # byebug
   end
 
   def unsubscribed
