@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2019_12_25_194441) do
     t.string "title"
   end
 
-  create_table "items", force: :cascade do |t|
+  create_table "items", force: :cascade do |t| 
     t.string "title"
     t.string "description"
     t.boolean "available"
