@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
 
-    skip_before_action :authorized, only: [:index]
+    skip_before_action :authorized
 
     def index
         @items = Item.all
